@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+
+
+public class Product {
+	
+	private String pNumber;
+	private String pName;
+	private int pPrice;
+    private ArrayList<Orderline> orderlines;
+	
+    public void addOrderline(Orderline orderline){
+
+        this.orderlines.add(orderline);
+    }
+ 
+    
+	public ArrayList<Orderline> getOrderslines(){
+        return this.orderlines;
+    }
+	
+	public String getPNumber(){
+		return this.pNumber;
+	}
+	public void setPNumber(String newPNumber){
+		this.pNumber = newPNumber;
+	}
+	public String getPName(){
+		return this.pName;
+	}
+	public void setPName(String newPName){
+		this.pName = newPName;
+	}
+	public int getPPrice(){
+		return this.pPrice;
+	}
+	public void setPPrice(int newPPrice){
+		this.pPrice = newPPrice;
+	}
+	
+	public Product(String pNumber, String pName, int pPrice){
+		this.setPNumber(pNumber);
+		this.setPName(pName);
+		this.setPPrice(pPrice);
+        this.orderlines = new ArrayList<Orderline>();
+	}
+}
+
+
