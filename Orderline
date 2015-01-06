@@ -1,0 +1,33 @@
+public class Orderline {
+
+	private int amount;
+	private Product product;
+	private Order order;
+	
+	public void setOrder(Order order){
+        this.order = order;
+    }
+	
+    public Order getOrder(){
+        return this.order;
+    }
+	
+	public void setProduct(Product product){
+        this.product = product;
+    }
+    
+	public Product getProduct(){
+        return this.product;
+    }
+	
+	public int getAmount(){
+		return this.amount;
+	}
+	public void setAmount(int newAmount){
+		this.amount = newAmount;
+	}
+	public Orderline(int amount){
+		this.setAmount(amount);
+	}
+	
+}
