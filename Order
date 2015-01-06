@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+
+public class Order {
+	
+	private String oNumber;
+	private Customer customer;
+	private ArrayList<Orderline> orderlines;
+	private ArrayList<Orderline> orderline;
+    
+    
+	public void addOrderline(Orderline orderline){
+        this.orderline.add(orderline);
+    }
+	public ArrayList<Orderline> getOrderlines(){
+        return this.orderlines;
+    }
+	
+	public void setCustomer(Customer customer){
+        this.customer = customer;
+    }
+    
+	public Customer getCustomer(){
+        return this.customer;
+    }
+		
+	public String getONumber(){
+		return this.oNumber;
+	}
+	public void setONumber(String newONumber){
+		this.oNumber = newONumber;
+	}
+	
+	public Order(String oNumner, Customer customer) {
+        this.setONumber(oNumber);
+        this.setCustomer(customer);
+        this.orderline = new ArrayList<Orderline>();
+    }
+	 	
+}
