@@ -1,0 +1,48 @@
+
+import java.util.*;
+
+public class CustomerRegister {
+
+	private ArrayList<Customer> customers = new ArrayList<Customer>();
+	private ArrayList<Order> orders = new ArrayList<Order>();
+
+	public ArrayList<Customer> getCustomers() {
+		return this.customers;
+	}
+
+	public void setCustomers(ArrayList<Customer> value) {
+		this.customers = value;
+	}
+
+	public void addCustomer(Customer newCustomer) {
+		this.customers.add(newCustomer);
+
+	}
+
+	public void addCustomer(String nbr, String name) {
+		Customer tmpCustomer = new Customer(nbr, name);
+		customers.add(tmpCustomer);
+	}
+
+	public void removeCustomer(String cNumberRemove) {
+		customers.remove(cNumberRemove);
+	}
+
+	public Customer findCustomer(String cNumber) {
+		for (Customer c : this.customers) {
+			if (c.getCNumber().equals(cNumber)) {
+				return c;
+			}
+		}
+		return null;
+	}
+
+	public Order findOrder(String oNumber) {
+		for (Order o : this.orders) {
+			if (o.getONumber().equals(oNumber)) {
+				return o;
+			}
+		}
+		return null;
+	}
+}
