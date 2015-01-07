@@ -1,0 +1,600 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+import java.awt.CardLayout;
+
+import javax.swing.JPanel;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+import java.awt.Color;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollBar;
+import javax.swing.ButtonGroup;
+import javax.swing.ListSelectionModel;
+import javax.swing.text.JTextComponent;
+
+import java.awt.SystemColor;
+
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import java.awt.Choice;
+import java.awt.Label;
+import java.awt.Font;
+
+
+public class applicaiton {
+
+	private JFrame frmSchinnBenn;
+	private JPanel panelMenu;
+	private JPanel panelAddC;
+	private JPanel panelFindC;
+	private JPanel panelAddO;
+	private JPanel panelAddP;
+	private JPanel panelProdutL;
+	private JPanel panelOrderH;
+	private JTextField textField_CName;
+	private JTextField textField_CNumber;
+	private JTextField textField_CPhone;
+	private JTextField textField_CAdress;
+	private JTextField textField_CEmail;
+	private JTextField textField_5;
+	private JTextField textFieldCNumber;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	private JTextField textField_10;
+	private JTextField textField_11;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private Controller controller; //Koppling till klassen Controller
+	private CustomerRegister customerRegister;
+	private DefaultListModel showOrderList = new DefaultListModel();
+	protected JTextComponent lblRepons;
+	private JList ordersList;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_6;
+	private JTextField textField_12;
+	private JTextField textField_13;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					applicaiton window = new applicaiton();
+					window.frmSchinnBenn.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public applicaiton() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmSchinnBenn = new JFrame();
+		frmSchinnBenn.setTitle("Schinn & Benn");
+		frmSchinnBenn.setBounds(100, 100, 593, 485);
+		frmSchinnBenn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmSchinnBenn.getContentPane().setLayout(new CardLayout(0, 0));
+		customerRegister = new CustomerRegister();
+		controller = new Controller(customerRegister, frmSchinnBenn);
+		
+		//Panels
+		
+		final JPanel panelMenu = new JPanel();
+		frmSchinnBenn.getContentPane().add(panelMenu, "name_1420303638010798000");
+		panelMenu.setLayout(null);
+		panelMenu.setVisible(true);
+		
+		final JPanel panelAddC = new JPanel();
+		frmSchinnBenn.getContentPane().add(panelAddC, "name_1420305001653667000");
+		panelAddC.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Namn:");
+		lblNewLabel.setBounds(75, 46, 61, 16);
+		panelAddC.add(lblNewLabel);
+		
+		JLabel lblKundnummer = new JLabel("Kundnummer:");
+		lblKundnummer.setBounds(75, 84, 90, 16);
+		panelAddC.add(lblKundnummer);
+		
+		JLabel lblTelefonnummer = new JLabel("Telefon:");
+		lblTelefonnummer.setBounds(75, 122, 99, 16);
+		panelAddC.add(lblTelefonnummer);
+		
+		JLabel lblAdress = new JLabel("Adress:");
+		lblAdress.setBounds(75, 157, 61, 16);
+		panelAddC.add(lblAdress);
+		
+		JLabel lblNewLabel_1 = new JLabel("Email:");
+		lblNewLabel_1.setBounds(75, 192, 61, 16);
+		panelAddC.add(lblNewLabel_1);
+		
+		textField_CName = new JTextField();
+		textField_CName.setBounds(196, 42, 200, 23);
+		panelAddC.add(textField_CName);
+		textField_CName.setColumns(10);
+		
+		textField_CNumber = new JTextField();
+		textField_CNumber.setColumns(10);
+		textField_CNumber.setBounds(196, 80, 200, 23);
+		panelAddC.add(textField_CNumber);
+		
+		textField_CPhone = new JTextField();
+		textField_CPhone.setColumns(10);
+		textField_CPhone.setBounds(196, 118, 200, 23);
+		panelAddC.add(textField_CPhone);
+		
+		textField_CAdress = new JTextField();
+		textField_CAdress.setColumns(10);
+		textField_CAdress.setBounds(196, 153, 200, 23);
+		panelAddC.add(textField_CAdress);
+		
+		textField_CEmail = new JTextField();
+		textField_CEmail.setColumns(10);
+		textField_CEmail.setBounds(196, 188, 200, 23);
+		panelAddC.add(textField_CEmail);
+		
+	
+		
+		JLabel lblResponsAddC = new JLabel("Respons:");
+		lblResponsAddC.setBounds(254, 301, 127, 16);
+		panelAddC.add(lblResponsAddC);
+		panelAddC.setVisible(false);
+		
+		JButton btnLggTill = new JButton("Lägg Till");
+		btnLggTill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 String CName = textField_CName.getText();
+				 String CNumber = textField_CNumber.getText();
+				 controller.addCustomer(CName, CNumber);
+				 lblResponsAddC.setText("Ny kund lades till");
+			}
+		});
+		buttonGroup.add(btnLggTill);
+		btnLggTill.setBounds(244, 242, 117, 29);
+		panelAddC.add(btnLggTill);
+		
+		JLabel lblLggTillndrahittaKund = new JLabel("Lägg Till Kund");
+		lblLggTillndrahittaKund.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblLggTillndrahittaKund.setForeground(SystemColor.controlHighlight);
+		lblLggTillndrahittaKund.setBounds(244, 14, 117, 16);
+		panelAddC.add(lblLggTillndrahittaKund);
+		
+		JButton btnTillbaka = new JButton("Tillbaka");
+		btnTillbaka.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelMenu.setVisible(true);
+				panelAddC.setVisible(false);
+			}
+		});
+		btnTillbaka.setBounds(6, 301, 107, 43);
+		panelAddC.add(btnTillbaka);
+		
+		
+		final JPanel panelFindC = new JPanel();
+		frmSchinnBenn.getContentPane().add(panelFindC, "name_1420305079419830000");
+		panelFindC.setLayout(null);
+		
+		JLabel lblAktuellaOrdrar = new JLabel("Aktuella Ordrar");
+		lblAktuellaOrdrar.setForeground(SystemColor.controlHighlight);
+		lblAktuellaOrdrar.setBounds(347, 16, 105, 16);
+		panelFindC.add(lblAktuellaOrdrar);
+		
+		JButton btnTaBortOrder = new JButton("Ta Bort Order");
+			
+		btnTaBortOrder.setBounds(243, 421, 117, 29);
+		panelFindC.add(btnTaBortOrder);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(0, 28, 152, 29);
+		panelFindC.add(textField_5);
+		textField_5.setColumns(10);
+		
+		textFieldCNumber = new JTextField();
+		textFieldCNumber.setColumns(10);
+		textFieldCNumber.setBounds(0, 81, 152, 29);
+		panelFindC.add(textFieldCNumber);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(0, 134, 152, 29);
+		panelFindC.add(textField_7);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(0, 182, 152, 29);
+		panelFindC.add(textField_8);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(0, 223, 152, 29);
+		panelFindC.add(textField_9);
+		
+		JLabel lblNamn = new JLabel("Namn");
+		lblNamn.setBounds(10, 6, 61, 16);
+		panelFindC.add(lblNamn);
+		
+		JLabel lblNewLabel_2 = new JLabel("Kundnummer");
+		lblNewLabel_2.setBounds(10, 60, 97, 16);
+		panelFindC.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Telefon");
+		lblNewLabel_3.setBounds(10, 111, 61, 16);
+		panelFindC.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Adress");
+		lblNewLabel_4.setBounds(10, 164, 61, 16);
+		panelFindC.add(lblNewLabel_4);
+		
+		JLabel lblEmial = new JLabel("Email");
+		lblEmial.setBounds(10, 208, 61, 16);
+		panelFindC.add(lblEmial);
+		
+		JButton btnFindC = new JButton("Hitta Kund");
+		btnFindC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String CNumber = textFieldCNumber.getText();
+				controller.customer.findCustomer(CNumber);
+				showOrderList.addElement(controller.customer.findCustomer(CNumber));
+
+				
+				
+				
+			}
+		});
+		btnFindC.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/add203.png")));
+		btnFindC.setBounds(0, 284, 117, 29);
+		panelFindC.add(btnFindC);
+		
+		JLabel lblRepons_1 = new JLabel("Repons:");
+		lblRepons_1.setBounds(10, 256, 70, 16);
+		panelFindC.add(lblRepons_1);
+		
+		JButton btnndra = new JButton("Ändra");
+		btnndra.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/gear13.png")));
+		btnndra.setBounds(0, 325, 117, 29);
+		panelFindC.add(btnndra);
+		
+		JButton btnTaBort = new JButton("Ta Bort");
+		btnTaBort.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/magnifier13.png")));
+		btnTaBort.setBounds(0, 362, 117, 29);
+		panelFindC.add(btnTaBort);
+		
+		JButton btnTillbaka_1 = new JButton("Tillbaka");
+		btnTillbaka_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelFindC.setVisible(false);
+				panelMenu.setVisible(true);
+			}
+		});
+		btnTillbaka_1.setBounds(6, 421, 117, 29);
+		panelFindC.add(btnTillbaka_1);
+		
+		JButton btnndraOrder = new JButton("Ändra order");
+		btnndraOrder.setBounds(375, 421, 117, 29);
+		panelFindC.add(btnndraOrder);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(243, 34, 309, 382);
+		panelFindC.add(scrollPane);
+		
+		JList list = new JList(showOrderList);
+		scrollPane.setViewportView(list);
+		panelFindC.setVisible(false);
+
+		final JPanel panelAddP = new JPanel();
+		frmSchinnBenn.getContentPane().add(panelAddP, "name_1420305135607310000");
+		panelAddP.setLayout(null);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(221, 49, 121, 21);
+		panelAddP.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblProduktnamn = new JLabel("Produktnamn:");
+		lblProduktnamn.setBounds(59, 52, 95, 16);
+		panelAddP.add(lblProduktnamn);
+		
+		JLabel lblNewLabel_5 = new JLabel("Lägg till produkt");
+		lblNewLabel_5.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblNewLabel_5.setForeground(SystemColor.controlHighlight);
+		lblNewLabel_5.setBackground(Color.BLUE);
+		lblNewLabel_5.setBounds(221, 6, 136, 16);
+		panelAddP.add(lblNewLabel_5);
+		
+		JLabel lblProduktnummer = new JLabel("Produktnr:");
+		lblProduktnummer.setBounds(59, 97, 95, 16);
+		panelAddP.add(lblProduktnummer);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(221, 94, 121, 21);
+		panelAddP.add(textField_3);
+		
+		JLabel lblProduktpris = new JLabel("Produktpris");
+		lblProduktpris.setBounds(59, 144, 95, 16);
+		panelAddP.add(lblProduktpris);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(221, 141, 121, 21);
+		panelAddP.add(textField_4);
+		
+		JLabel lblIngrediensdeklaration = new JLabel("Ingrediensdeklaration");
+		lblIngrediensdeklaration.setBounds(61, 190, 148, 16);
+		panelAddP.add(lblIngrediensdeklaration);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(221, 187, 121, 21);
+		panelAddP.add(textField_6);
+		
+		JLabel lblTillagningsmetod = new JLabel("Tillagningsmetod");
+		lblTillagningsmetod.setBounds(59, 236, 128, 16);
+		panelAddP.add(lblTillagningsmetod);
+		
+		textField_12 = new JTextField();
+		textField_12.setColumns(10);
+		textField_12.setBounds(221, 233, 121, 21);
+		panelAddP.add(textField_12);
+		
+		JLabel lblLagerplats = new JLabel("Lagerplats");
+		lblLagerplats.setBounds(59, 288, 128, 16);
+		panelAddP.add(lblLagerplats);
+		
+		textField_13 = new JTextField();
+		textField_13.setColumns(10);
+		textField_13.setBounds(221, 285, 121, 21);
+		panelAddP.add(textField_13);
+		
+		JButton btnLggTillProdukt = new JButton("Lägg till produkt");
+		btnLggTillProdukt.setBounds(211, 339, 148, 29);
+		panelAddP.add(btnLggTillProdukt);
+		
+		JButton btnNewButton = new JButton("Tillbaka");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelMenu.setVisible(true);
+				panelAddP.setVisible(false);
+			}
+		});
+		btnNewButton.setBounds(0, 416, 128, 29);
+		panelAddP.add(btnNewButton);
+		
+		JLabel label = new JLabel("");
+		label.setBounds(431, 416, 121, 21);
+		panelAddP.add(label);
+		panelAddP.setVisible(false);
+		
+			
+		
+				final JPanel panelAddO_1 = new JPanel();
+				frmSchinnBenn.getContentPane().add(panelAddO_1, "name_1420305099226321000");
+				panelAddO_1.setLayout(null);
+				
+				textField_10 = new JTextField();
+				textField_10.setBounds(0, 22, 134, 28);
+				panelAddO_1.add(textField_10);
+				textField_10.setColumns(10);
+				
+				JLabel lblKundnummer_1 = new JLabel("Kundnummer");
+				lblKundnummer_1.setBounds(6, 6, 113, 16);
+				panelAddO_1.add(lblKundnummer_1);
+				
+				JLabel lblOrdernummer = new JLabel("Ordernummer");
+				lblOrdernummer.setBounds(6, 56, 94, 16);
+				panelAddO_1.add(lblOrdernummer);
+				
+				textField_11 = new JTextField();
+				textField_11.setColumns(10);
+				textField_11.setBounds(0, 73, 134, 28);
+				panelAddO_1.add(textField_11);
+				
+				JScrollPane scrollPane_1 = new JScrollPane();
+				scrollPane_1.setBounds(276, 38, 311, 419);
+				panelAddO_1.add(scrollPane_1);
+				
+				JList list_1 = new JList();
+				scrollPane_1.setViewportView(list_1);
+				
+				JLabel lblProdukt = new JLabel("Produkt");
+				lblProdukt.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+				lblProdukt.setForeground(SystemColor.controlHighlight);
+				lblProdukt.setBounds(409, 6, 61, 16);
+				panelAddO_1.add(lblProdukt);
+				
+				textField = new JTextField();
+				textField.setColumns(10);
+				textField.setBounds(0, 133, 134, 28);
+				panelAddO_1.add(textField);
+				
+				JLabel lblRabatt = new JLabel("Rabatt:");
+				lblRabatt.setBounds(6, 105, 61, 16);
+				panelAddO_1.add(lblRabatt);
+				
+				textField_1 = new JTextField();
+				textField_1.setBounds(204, 306, 61, 16);
+				panelAddO_1.add(textField_1);
+				textField_1.setColumns(10);
+				
+				JLabel lblAntal = new JLabel("Antal:");
+				lblAntal.setBounds(147, 306, 45, 16);
+				panelAddO_1.add(lblAntal);
+				
+				JButton btnLggOrder_1 = new JButton("Lägg Order");
+				btnLggOrder_1.setBounds(0, 301, 117, 29);
+				panelAddO_1.add(btnLggOrder_1);
+				
+				JButton btnTillbaka_2 = new JButton("Tillbaka");
+				btnTillbaka_2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						panelMenu.setVisible(true);
+						panelAddO_1.setVisible(false);
+						
+					}
+				});
+				btnTillbaka_2.setBounds(0, 386, 117, 29);
+				panelAddO_1.add(btnTillbaka_2);
+				panelAddO_1.setVisible(false);
+
+		final JPanel panelProductL = new JPanel();
+		frmSchinnBenn.getContentPane().add(panelProductL, "name_1420305155435627000");
+		panelProductL.setLayout(null);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(18, 26, 550, 402);
+		panelProductL.add(scrollPane_2);
+		
+		JList list_2 = new JList();
+		scrollPane_2.setViewportView(list_2);
+		
+		JLabel lblProduktlista = new JLabel("Produktlista");
+		lblProduktlista.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblProduktlista.setForeground(SystemColor.controlHighlight);
+		lblProduktlista.setBounds(244, 6, 94, 16);
+		panelProductL.add(lblProduktlista);
+		
+		JButton btnTillbaka_3 = new JButton("Tillbaka");
+		btnTillbaka_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelMenu.setVisible(true);
+				panelProductL.setVisible(false);
+			}
+		});
+		btnTillbaka_3.setBounds(16, 434, 117, 29);
+		panelProductL.add(btnTillbaka_3);
+		
+		JButton btnTaBortProdukt = new JButton("Ta bort produkt");
+		btnTaBortProdukt.setBounds(205, 434, 133, 29);
+		panelProductL.add(btnTaBortProdukt);
+		
+		JButton btnndra_1 = new JButton("Ändra");
+		btnndra_1.setBounds(454, 434, 117, 29);
+		panelProductL.add(btnndra_1);
+		panelProductL.setVisible(false);
+
+		final JPanel panelOrderH = new JPanel();
+		frmSchinnBenn.getContentPane().add(panelOrderH, "name_1420305188866890000");
+		panelOrderH.setLayout(null);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(6, 23, 581, 404);
+		panelOrderH.add(scrollPane_3);
+		
+		JList list_3 = new JList();
+		scrollPane_3.setViewportView(list_3);
+		
+		JLabel lblNewLabel_6 = new JLabel("Orderhistorik");
+		lblNewLabel_6.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		lblNewLabel_6.setForeground(SystemColor.controlHighlight);
+		lblNewLabel_6.setBounds(259, 6, 96, 16);
+		panelOrderH.add(lblNewLabel_6);
+		
+		JButton btnTillbaka_4 = new JButton("Tillbaka");
+		btnTillbaka_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelMenu.setVisible(true);
+				panelOrderH.setVisible(false);
+			}
+		});
+		btnTillbaka_4.setBounds(0, 428, 117, 29);
+		panelOrderH.add(btnTillbaka_4);
+		panelOrderH.setVisible(false);
+
+		//Buttons
+		
+		JButton btnLäggTillKund = new JButton("Lägg till kund");
+		btnLäggTillKund.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/add70.png")));
+		btnLäggTillKund.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelAddC.setVisible(true);
+				panelMenu.setVisible(false);
+			}
+		});
+		btnLäggTillKund.setBounds(92, 18, 351, 61);
+		panelMenu.add(btnLäggTillKund);
+		
+		JButton btnHittandraKund = new JButton("Hitta/Ändra Kund");
+		btnHittandraKund.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelFindC.setVisible(true);
+				panelMenu.setVisible(false);
+			}
+		});
+		btnHittandraKund.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/add203.png")));
+		btnHittandraKund.setBounds(92, 91, 351, 61);
+		panelMenu.add(btnHittandraKund);
+		
+		JButton btnLggOrder = new JButton("Lägg Order");
+		btnLggOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelAddO_1.setVisible(true);
+				panelMenu.setVisible(false);
+			}
+		});
+		
+		JButton btnProductList = new JButton("Produkt lista");
+		btnProductList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelProductL.setVisible(true);
+				panelMenu.setVisible(false);
+			}
+		});
+		btnProductList.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/menu21.png")));
+		btnProductList.setBounds(92, 323, 351, 57);
+		panelMenu.add(btnProductList);
+		btnLggOrder.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/new10.png")));
+		btnLggOrder.setBounds(92, 164, 351, 61);
+		panelMenu.add(btnLggOrder);
+		
+		JButton btnAddProduct = new JButton("Lägg till produkt");
+		btnAddProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelAddP.setVisible(true);
+				panelMenu.setVisible(false);
+			}
+		});
+		btnAddProduct.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/add139.png")));
+		btnAddProduct.setBounds(92, 237, 351, 61);
+		panelMenu.add(btnAddProduct);
+		
+		JButton btnOrderHistory = new JButton("Orderhistorik");
+		btnOrderHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelOrderH.setVisible(true);
+				panelMenu.setVisible(false);
+			}
+		});
+		btnOrderHistory.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/order.png")));
+		btnOrderHistory.setBounds(92, 392, 351, 65);
+		panelMenu.add(btnOrderHistory);
+		
+		
+	}
+}
