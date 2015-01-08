@@ -1,0 +1,28 @@
+
+
+
+public class Controller {
+	CustomerRegister customer;
+	JFrame frmSchinnBenn;
+	
+	public Controller(CustomerRegister customerReg, JFrame frmSchinnBenn) {
+		 this.customer = customerReg;
+		 this.frmSchinnBenn = frmSchinnBenn;
+	}
+	
+	public boolean addCustomer(String cNumber, String cName) {
+		 Customer tmpCustomer = new Customer(cNumber, cName);
+		 return customer.addCustomer(tmpCustomer);
+	}
+		
+	public Customer findCustomer(String cNumber){
+		return this.customer.findCustomer(cNumber);
+	}
+	
+	public Customer getCEmail(String cEmail){
+		return this.customer.findCustomer(cEmail);
+	}
+	
+	
+
+}
