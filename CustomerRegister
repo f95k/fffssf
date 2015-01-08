@@ -14,8 +14,14 @@ public class CustomerRegister {
 		this.customers = value;
 	}
 
-	public void addCustomer(Customer newCustomer) {
+	public boolean addCustomer(Customer newCustomer) {
 		this.customers.add(newCustomer);
+		
+		if(this.customers.contains(newCustomer)){
+			return true;
+		}else return false;
+			
+			
 
 	}
 
