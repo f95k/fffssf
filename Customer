@@ -6,6 +6,9 @@ public class Customer {
 
 	private String cNumber;
 	private String cName;
+	private String cEmail;
+	private String cAddress;
+	private String cTelephoneNbr;
 	private ArrayList<Order> orders;
 	
 	public void addOrder(Order order){
@@ -33,5 +36,37 @@ public class Customer {
 		this.setCName(cName);
 		this.orders = new ArrayList<Order>();
     }
+	
+	@Override
+	public String toString(){
+		
+		return cNumber + " " + cName;
+		
+	}
+
+	public String getCEmail() {
+		return this.cEmail;
+	}
+	
+	public void setCEmai(String email){
+		this.cEmail = email;
+	}
+	
+	
+	public String getCAddress() {
+		return this.cAddress;
+	}
+	
+	public void setCAddress(String nbr){
+		this.cAddress = nbr;
+	}
+	
+	public String getCTelephoneNbr() {
+		return this.cTelephoneNbr;
+	}
+	
+	public void setCTelephoneNbr(String nbr){
+		this.cTelephoneNbr = nbr;
+	}
 
 }
