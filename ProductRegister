@@ -1,0 +1,33 @@
+
+import java.util.*;
+
+public class ProductRegister {
+	private ArrayList<Product> products = new ArrayList<Product>();
+	
+	public Product findProduct(String pNumber){
+		for(Product p : this.products){
+			if(pNumber.equals(p.getPNumber())){
+				return p;
+			}
+		}
+		
+		return null;
+	}
+	
+	public ArrayList<Product> getProducts(){
+		return this.products;
+	}
+	
+	public void removeProduct(Product p){
+		this.products.remove(p);
+	}
+	
+	public boolean addProduct(String pNumber, String pName, int pPrice){
+		Product tempProduct = new Product(pNumber, pName, pPrice);
+		this.products.add(tempProduct);
+		if(this.findProduct(pNumber) != null) return true;
+		
+		return false;
+	}
+
+}
