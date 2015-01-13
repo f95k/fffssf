@@ -840,7 +840,6 @@ public class applicaiton {
 		//Buttons
 		
 		JButton btnLäggTillKund = new JButton("Lägg till kund");
-		btnLäggTillKund.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/add70.png")));
 		btnLäggTillKund.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelAddC.setVisible(true);
@@ -857,7 +856,6 @@ public class applicaiton {
 				panelMenu.setVisible(false);
 			}
 		});
-		btnHittandraKund.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/add203.png")));
 		btnHittandraKund.setBounds(92, 91, 351, 61);
 		panelMenu.add(btnHittandraKund);
 		
@@ -902,10 +900,8 @@ public class applicaiton {
 				
 			}
 		});
-		btnProductList.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/menu21.png")));
 		btnProductList.setBounds(92, 323, 351, 57);
 		panelMenu.add(btnProductList);
-		btnLggOrder.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/new10.png")));
 		btnLggOrder.setBounds(92, 164, 351, 61);
 		panelMenu.add(btnLggOrder);
 		
@@ -916,7 +912,6 @@ public class applicaiton {
 				panelMenu.setVisible(false);
 			}
 		});
-		btnAddProduct.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/add139.png")));
 		btnAddProduct.setBounds(92, 237, 351, 61);
 		panelMenu.add(btnAddProduct);
 		
@@ -927,7 +922,6 @@ public class applicaiton {
 				panelMenu.setVisible(false);
 			}
 		});
-		btnOrderHistory.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/order.png")));
 		btnOrderHistory.setBounds(92, 392, 351, 65);
 		panelMenu.add(btnOrderHistory);
 		
