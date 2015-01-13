@@ -184,7 +184,6 @@ public class applicaiton {
 		panelAddC.setVisible(false);
 		
 		JButton btnLggTill = new JButton("Lägg Till");
-		btnLggTill.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693374_plus-24-16.png")));
 		btnLggTill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 String CName = textField_CName.getText();
@@ -240,7 +239,7 @@ public class applicaiton {
 		}
 		});
 		buttonGroup.add(btnLggTill);
-		btnLggTill.setBounds(244, 237, 117, 29);
+		btnLggTill.setBounds(244, 223, 117, 29);
 		panelAddC.add(btnLggTill);
 		
 		JLabel lblLggTillndrahittaKund = new JLabel("Lägg Till Kund");
@@ -250,7 +249,6 @@ public class applicaiton {
 		panelAddC.add(lblLggTillndrahittaKund);
 		
 		JButton btnTillbaka = new JButton("Tillbaka");
-		btnTillbaka.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693016_back-16.png")));
 		btnTillbaka.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelMenu.setVisible(true);
@@ -284,7 +282,6 @@ public class applicaiton {
 				
 			}
 		});
-		btnTaBortOrder.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693323_cross-24-16.png")));
 			
 		btnTaBortOrder.setBounds(293, 425, 117, 25);
 		panelFindC.add(btnTaBortOrder);
@@ -345,8 +342,6 @@ public class applicaiton {
 		
 		JButton btnFindC = new JButton("Hitta Kund");
 		buttonGroup.add(btnFindC);
-		
-		btnFindC.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/add203.png")));
 		btnFindC.setBounds(43, 312, 152, 29);
 		panelFindC.add(btnFindC);
 		
@@ -379,7 +374,6 @@ public class applicaiton {
 				
 			}
 		});
-		btnndra.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/gear13.png")));
 		btnndra.setBounds(43, 342, 152, 25);
 		panelFindC.add(btnndra);
 		
@@ -415,12 +409,10 @@ public class applicaiton {
 				
 			}
 		});
-		btnTaBort.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/magnifier13.png")));
 		btnTaBort.setBounds(43, 370, 152, 29);
 		panelFindC.add(btnTaBort);
 		
 		JButton btnTillbaka_1 = new JButton("Tillbaka");
-		btnTillbaka_1.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693016_back-16.png")));
 		btnTillbaka_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelFindC.setVisible(false);
@@ -431,7 +423,6 @@ public class applicaiton {
 		panelFindC.add(btnTillbaka_1);
 		
 		JButton btnndraOrder = new JButton("Ändra order");
-		btnndraOrder.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693533_black_2_audio_simple_repeat_2-16.png")));
 		btnndraOrder.setBounds(407, 425, 117, 25);
 		panelFindC.add(btnndraOrder);
 		
@@ -579,12 +570,10 @@ public class applicaiton {
 				
 			}
 		});
-		btnLggTillProdukt.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693374_plus-24-16.png")));
 		btnLggTillProdukt.setBounds(211, 339, 148, 29);
 		panelAddP.add(btnLggTillProdukt);
 		
 		JButton btnNewButton = new JButton("Tillbaka");
-		btnNewButton.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693016_back-16.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelMenu.setVisible(true);
@@ -713,14 +702,11 @@ public class applicaiton {
 						 
 						}	 
 					});
-				
-				btnLggOrder_1.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693374_plus-24-16.png")));
 					
 				btnLggOrder_1.setBounds(157, 295, 117, 29);
 				panelAddO_1.add(btnLggOrder_1);
 				
 				JButton btnTillbaka_2 = new JButton("Tillbaka");
-				btnTillbaka_2.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693016_back-16.png")));
 				btnTillbaka_2.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						panelMenu.setVisible(true);
@@ -758,7 +744,6 @@ public class applicaiton {
 		panelProductL.add(lblProduktlista);
 		
 		JButton btnTillbaka_3 = new JButton("Tillbaka");
-		btnTillbaka_3.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693016_back-16.png")));
 		btnTillbaka_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelMenu.setVisible(true);
@@ -769,7 +754,6 @@ public class applicaiton {
 		panelProductL.add(btnTillbaka_3);
 		
 		JButton btnTaBortProdukt = new JButton("Ta bort produkt");
-		btnTaBortProdukt.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693323_cross-24-16.png")));
 		btnTaBortProdukt.setBounds(315, 428, 133, 29);
 		panelProductL.add(btnTaBortProdukt);
 		
@@ -802,7 +786,6 @@ public class applicaiton {
 				
 			}
 		});
-		btnndra_1.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693533_black_2_audio_simple_repeat_2-16.png")));
 	
 		btnndra_1.setBounds(451, 428, 117, 29);
 		panelProductL.add(btnndra_1);
@@ -827,7 +810,6 @@ public class applicaiton {
 		panelOrderH.add(lblNewLabel_6);
 		
 		JButton btnTillbaka_4 = new JButton("Tillbaka");
-		btnTillbaka_4.setIcon(new ImageIcon(applicaiton.class.getResource("/bilder12/1420693016_back-16.png")));
 		btnTillbaka_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelMenu.setVisible(true);
