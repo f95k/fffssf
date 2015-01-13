@@ -35,5 +35,11 @@ public class Order {
         this.setCustomer(customer);
         this.orderline = new ArrayList<Orderline>();
     }
+	
+	
+	@Override
+	public String toString(){
+		return "Ordernummer: " + this.oNumber;
+	}
 	 	
 }
