@@ -1,13 +1,19 @@
+import java.util.ArrayList;
 
+import javax.swing.JFrame;
 
 
 public class Controller {
 	CustomerRegister customer;
 	JFrame frmSchinnBenn;
+	ProductRegister product;
+	Order order;
 	
-	public Controller(CustomerRegister customerReg, JFrame frmSchinnBenn) {
+	public Controller(CustomerRegister customerReg, JFrame frmSchinnBenn, ProductRegister productReg, Order addOrder) {
 		 this.customer = customerReg;
+		 this.product = productReg;
 		 this.frmSchinnBenn = frmSchinnBenn;
+		 this.order = addOrder;
 	}
 	
 	public boolean addCustomer(String cNumber, String cName) {
@@ -17,11 +23,42 @@ public class Controller {
 		
 	public Customer findCustomer(String cNumber){
 		return this.customer.findCustomer(cNumber);
+		
+	}
+
+	public void removeCustomer(Customer c) {
+		customer.removeCustomer(c);
+		
 	}
 	
-	public Customer getCEmail(String cEmail){
-		return this.customer.findCustomer(cEmail);
+	
+	public boolean addProduct(String pNumber, String pName, int pPrice) {
+		return product.addProduct(pNumber, pName, pPrice);
 	}
+	
+	public Product findProduct(String pNumber){
+		return this.product.findProduct(pNumber);
+	}
+	
+	public ArrayList<Product> getProducts(){
+		return product.getProducts();
+	}
+	
+	public void addOrderline(Product p, Orderline ol, Order o){
+		p.addOrderline(ol);
+		ol.setOrder(o);
+		ol.setProduct(p);
+	}
+	
+	public Order getOrder(Customer c, String oNumber){
+		ArrayList<Order> ol = c.getOrders();
+		for(Order o: ol){
+			if(o.getONumber() == oNumber) return o;
+		}
+		
+		return null;
+	}
+	
 	
 	
 
