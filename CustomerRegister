@@ -30,8 +30,8 @@ public class CustomerRegister {
 		customers.add(tmpCustomer);
 	}
 
-	public void removeCustomer(String cNumberRemove) {
-		customers.remove(cNumberRemove);
+	public void removeCustomer(Customer c) {
+		customers.remove(c);
 	}
 
 	public Customer findCustomer(String cNumber) {
@@ -41,6 +41,15 @@ public class CustomerRegister {
 			}
 		}
 		return null;
+	}
+	
+	public void addOrder(String oNumber, Customer customer) {
+		Order tmpOrder = new Order(oNumber, customer);
+		orders.add(tmpOrder);
+	}
+	
+	public void removeOrder(Order o) {
+		orders.remove(o);
 	}
 
 	public Order findOrder(String oNumber) {
