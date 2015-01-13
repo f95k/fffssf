@@ -37,6 +37,10 @@ public class Customer {
 		this.orders = new ArrayList<Order>();
     }
 	
+	public void removeOrder(Order o){
+		this.orders.remove(o);
+	}
+	
 	@Override
 	public String toString(){
 		
@@ -64,6 +68,8 @@ public class Customer {
 	public String getCTelephoneNbr() {
 		return this.cTelephoneNbr;
 	}
+	
+
 	
 	public void setCTelephoneNbr(String nbr){
 		this.cTelephoneNbr = nbr;
