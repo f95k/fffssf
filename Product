@@ -6,6 +6,7 @@ public class Product {
 	private String pNumber;
 	private String pName;
 	private int pPrice;
+	private int pDiscount;
     private ArrayList<Orderline> orderlines;
 	
     public void addOrderline(Orderline orderline){
@@ -37,11 +38,24 @@ public class Product {
 		this.pPrice = newPPrice;
 	}
 	
+	public void setPDiscount(int discount) {
+		this.pDiscount = discount;
+	}
+	
+	public int getPDiscount() {
+		return this.pDiscount;
+	}
+	
 	public Product(String pNumber, String pName, int pPrice){
 		this.setPNumber(pNumber);
 		this.setPName(pName);
 		this.setPPrice(pPrice);
         this.orderlines = new ArrayList<Orderline>();
+	}
+	
+	@Override
+	public String toString(){
+		return "Produktnummer: " + this.pNumber + " ProduktNamn: " + this.pName + " Pris: " + this.pPrice;
 	}
 }
 
