@@ -1,38 +1,62 @@
-public class Orderline {
+import java.util.ArrayList;
 
-	private int amount;
-	private Product product;
-	private Order order;
+
+public class Product {
 	
-	public void setOrder(Order order){
-        this.order = order;
-    }
+	private String pNumber;
+	private String pName;
+	private int pPrice;
+	private int pDiscount;
+    private ArrayList<Orderline> orderlines;
 	
-    public Order getOrder(){
-        return this.order;
+    public void addOrderline(Orderline orderline){
+
+        this.orderlines.add(orderline);
     }
-	
-	public void setProduct(Product product){
-        this.product = product;
-    }
+ 
     
-	public Product getProduct(){
-        return this.product;
+	public ArrayList<Orderline> getOrderslines(){
+        return this.orderlines;
     }
 	
-	public int getAmount(){
-		return this.amount;
+	public String getPNumber(){
+		return this.pNumber;
 	}
-	public void setAmount(int newAmount){
-		this.amount = newAmount;
+	public void setPNumber(String newPNumber){
+		this.pNumber = newPNumber;
 	}
-	public Orderline(int amount){
-		this.setAmount(amount);
+	public String getPName(){
+		return this.pName;
+	}
+	public void setPName(String newPName){
+		this.pName = newPName;
+	}
+	public int getPPrice(){
+		return this.pPrice;
+	}
+	public void setPPrice(int newPPrice){
+		this.pPrice = newPPrice;
 	}
 	
-	@Override
+	public void setPDiscount(int discount) {
+		this.pDiscount = discount;
+	}
+	
+	public int getPDiscount() {
+		return this.pDiscount;
+	}
+	
+	public Product(String pNumber, String pName, int pPrice){
+		this.setPNumber(pNumber);
+		this.setPName(pName);
+		this.setPPrice(pPrice);
+        this.orderlines = new ArrayList<Orderline>();
+	}
+	
+	@Override  
 	public String toString(){
-		return "Produkt: " + product.getPName() + " Antal: " + amount;
+		return "Produktnummer: " + this.pNumber + " ProduktNamn: " + this.pName + " Pris: " + this.pPrice; //objekt till tostring. representaation av objeket > klassnambet + kod > säger inte så mkt. strängpresentation . bygga upp en egen sträng hur objektet ska overridas.
 	}
-	
 }
+
+
