@@ -41,6 +41,10 @@ import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.AbstractListModel;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class applicaiton {
@@ -71,20 +75,22 @@ public class applicaiton {
 	private Controller controller; //Koppling till klassen Controller
 	private CustomerRegister customerRegister;
 	private ProductRegister productRegister;
-	private Order order;
 	private JList showOrderList;
 	private DefaultListModel<Product> pl;
 	private DefaultListModel<Order> ol;
+	private JButton changeP;
 	protected JTextComponent lblRepons;
 	private JTextField textField_ODiscount;
 	private JTextField textField_Olines;
 	private JTextField textField_PName;
 	private JTextField textField_PNbr;
 	private JTextField textField_PPrice;
-	private JTextField textField_PContent;
-	private JTextField textField_PPrepMethod;
-	private JTextField textField_PWarehouse;
-	private JTextField textField_findOrder;
+	private JTextField textField_PNbrC;
+	private JTextField textField_PNameC;
+	private JTextField textField_PPC;
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -119,7 +125,7 @@ public class applicaiton {
 		frmSchinnBenn.getContentPane().setLayout(new CardLayout(0, 0));
 		customerRegister = new CustomerRegister();
 		productRegister = new ProductRegister();
-		controller = new Controller(customerRegister, frmSchinnBenn, productRegister, order);
+		controller = new Controller(customerRegister, frmSchinnBenn, productRegister);
 		
 		//Panels
 		
@@ -277,8 +283,9 @@ public class applicaiton {
 				 Customer c = controller.findCustomer(textFieldCNumber.getText());
 				 c.removeOrder(o);
 				 
-				 ol.remove(selectedIndex);
-				 list_orders.updateUI();
+				 ol.removeElement(o);
+				 
+				 list_orders.repaint(); 
 				
 			}
 		});
@@ -422,7 +429,34 @@ public class applicaiton {
 		btnTillbaka_1.setBounds(43, 421, 152, 29);
 		panelFindC.add(btnTillbaka_1);
 		
-		JButton btnndraOrder = new JButton("Ändra order");
+		JButton btnndraOrder = new JButton("Orderdetaljer");
+		btnndraOrder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Order o = (Order)list_orders.getSelectedValue();
+				if(o == null){
+					JOptionPane.showMessageDialog(frmSchinnBenn,
+						    "Ingen order har valts!",
+						    "Välj order",
+						    JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+				
+				ArrayList<Orderline> ols = o.getOrderlines();
+				
+				StringBuilder sb = new StringBuilder();
+				
+				for(Orderline oline : ols){
+					sb.append(oline.toString() + "\n");
+				}
+				
+				JOptionPane.showMessageDialog(frmSchinnBenn,
+					    sb.toString(),
+					    "Orderspecifikation",
+					    JOptionPane.INFORMATION_MESSAGE);
+				
+				
+			}
+		});
 		btnndraOrder.setBounds(407, 425, 117, 25);
 		panelFindC.add(btnndraOrder);
 		
@@ -487,33 +521,6 @@ public class applicaiton {
 		textField_PPrice.setBounds(221, 141, 121, 21);
 		panelAddP.add(textField_PPrice);
 		
-		JLabel lblIngrediensdeklaration = new JLabel("Ingrediensdeklaration");
-		lblIngrediensdeklaration.setBounds(61, 190, 148, 16);
-		panelAddP.add(lblIngrediensdeklaration);
-		
-		textField_PContent = new JTextField();
-		textField_PContent.setColumns(10);
-		textField_PContent.setBounds(221, 187, 121, 21);
-		panelAddP.add(textField_PContent);
-		
-		JLabel lblTillagningsmetod = new JLabel("Tillagningsmetod");
-		lblTillagningsmetod.setBounds(59, 236, 128, 16);
-		panelAddP.add(lblTillagningsmetod);
-		
-		textField_PPrepMethod = new JTextField();
-		textField_PPrepMethod.setColumns(10);
-		textField_PPrepMethod.setBounds(221, 233, 121, 21);
-		panelAddP.add(textField_PPrepMethod);
-		
-		JLabel lblLagerplats = new JLabel("Lagerplats");
-		lblLagerplats.setBounds(59, 288, 128, 16);
-		panelAddP.add(lblLagerplats);
-		
-		textField_PWarehouse = new JTextField();
-		textField_PWarehouse.setColumns(10);
-		textField_PWarehouse.setBounds(221, 285, 121, 21);
-		panelAddP.add(textField_PWarehouse);
-		
 		JButton btnLggTillProdukt = new JButton("Lägg till produkt");
 		btnLggTillProdukt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -570,7 +577,7 @@ public class applicaiton {
 				
 			}
 		});
-		btnLggTillProdukt.setBounds(211, 339, 148, 29);
+		btnLggTillProdukt.setBounds(209, 212, 148, 29);
 		panelAddP.add(btnLggTillProdukt);
 		
 		JButton btnNewButton = new JButton("Tillbaka");
@@ -580,7 +587,7 @@ public class applicaiton {
 				panelAddP.setVisible(false);
 			}
 		});
-		btnNewButton.setBounds(0, 416, 128, 29);
+		btnNewButton.setBounds(6, 264, 128, 29);
 		panelAddP.add(btnNewButton);
 		
 		JLabel label = new JLabel("");
@@ -649,6 +656,7 @@ public class applicaiton {
 						String olines = textField_Olines.getText();
 						int Olines = 0;
 						
+						
 						if(olines.length() == 0){
 							JOptionPane.showMessageDialog(frmSchinnBenn,
 								    "Ange antal!", "Antal tomt",
@@ -671,7 +679,7 @@ public class applicaiton {
 									    JOptionPane.INFORMATION_MESSAGE);
 							 return;
 						}
-						if(ONumber.length() == 0) {
+						if(ONumber.length() == 0 || ONumber == null) {
 							 JOptionPane.showMessageDialog(frmSchinnBenn,
 									    "Ange ett ordernummer", "Ordernummer fattas",
 									    JOptionPane.INFORMATION_MESSAGE);
@@ -686,12 +694,17 @@ public class applicaiton {
 									    JOptionPane.INFORMATION_MESSAGE);
 							 return;
 						 }
-						 
+						
 						 
 						 Order order = controller.getOrder(c, ONumber);
 						 
 						 //Check whether an order is already made
-						 if(order == null) order = new Order(ONumber, c);
+						 if(order == null){
+							 
+							 order = new Order(ONumber, c);
+							 controller.addOrder(c, order);
+							 
+						 }
 
 						 int[] selectedIx = list_1.getSelectedIndices();
 						 
@@ -699,6 +712,10 @@ public class applicaiton {
 							 Product p =  pl.getElementAt(i);
 							 controller.addOrderline(p, new Orderline(Olines), order);
 						 }
+						 
+						 JOptionPane.showMessageDialog(frmSchinnBenn,
+								    "Order har lagts till", "Order lagd",
+								    JOptionPane.INFORMATION_MESSAGE);
 						 
 						}	 
 					});
@@ -723,13 +740,35 @@ public class applicaiton {
 		panelProductL.setLayout(null);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(18, 26, 550, 402);
+		scrollPane_2.setBounds(254, 26, 314, 402);
 		panelProductL.add(scrollPane_2);
 		
 		
 		pl = new DefaultListModel<Product>();
 		
 		JList list_2 =  new JList(pl);
+		list_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//Get the product selected
+				Product p = (Product)list_2.getSelectedValue();
+				
+				
+				textField_PNbrC.setBackground(Color.WHITE);
+				textField_PNbrC.setEditable(true);
+				textField_PNameC.setEditable(true);
+				textField_PNameC.setBackground(Color.WHITE);
+				textField_PPC.setEditable(true);
+				textField_PPC.setBackground(Color.WHITE);
+				
+				textField_PNbrC.setText(p.getPNumber());
+				textField_PNameC.setText(p.getPName());
+				textField_PPC.setText( (new Integer(p.getPPrice()) ).toString() );
+			}
+		});
+		
+		
 		list_2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_2.setViewportView(list_2);
 		
@@ -754,41 +793,97 @@ public class applicaiton {
 		panelProductL.add(btnTillbaka_3);
 		
 		JButton btnTaBortProdukt = new JButton("Ta bort produkt");
-		btnTaBortProdukt.setBounds(315, 428, 133, 29);
+		btnTaBortProdukt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String pNumber = textField_PNbrC.getText();
+				controller.removeProduct(controller.findProduct(pNumber));
+				
+				textField_PNbrC.setText("");
+				textField_PNbrC.setEditable(false);
+				textField_PNbrC.setBackground(Color.LIGHT_GRAY);
+				textField_PNameC.setText("");
+				textField_PNameC.setEditable(false);
+				textField_PNameC.setBackground(Color.LIGHT_GRAY);
+
+				textField_PPC.setText("");
+				textField_PPC.setEditable(false);
+				textField_PPC.setBackground(Color.LIGHT_GRAY);
+				
+				pl.removeElement(list_2.getSelectedValue());
+				
+				list_2.repaint();
+			}
+		});
+		btnTaBortProdukt.setBounds(2, 209, 133, 29);
 		panelProductL.add(btnTaBortProdukt);
 		
-		JButton btnndra_1 = new JButton("Ändra");
-		btnndra_1.addActionListener(new ActionListener() {
+		
+		textField_PNbrC = new JTextField();
+		textField_PNbrC.setEditable(false);
+		textField_PNbrC.setBackground(SystemColor.window);
+		textField_PNbrC.setBounds(96, 34, 134, 28);
+		panelProductL.add(textField_PNbrC);
+		textField_PNbrC.setColumns(10);
+		
+		textField_PNameC = new JTextField();
+		textField_PNameC.setEditable(false);
+		textField_PNameC.setBackground(SystemColor.window);
+		textField_PNameC.setBounds(96, 74, 134, 28);
+		panelProductL.add(textField_PNameC);
+		textField_PNameC.setColumns(10);
+		
+		textField_PPC = new JTextField();
+		textField_PPC.setEditable(false);
+		textField_PPC.setBackground(SystemColor.window);
+		textField_PPC.setBounds(96, 114, 134, 28);
+		panelProductL.add(textField_PPC);
+		textField_PPC.setColumns(10);
+		
+		JLabel lblProduktnr = new JLabel("Produktnr");
+		lblProduktnr.setBounds(6, 40, 78, 16);
+		panelProductL.add(lblProduktnr);
+		
+		JLabel lblProduktnamn_1 = new JLabel("Produktnamn");
+		lblProduktnamn_1.setBounds(6, 80, 94, 16);
+		panelProductL.add(lblProduktnamn_1);
+		
+		JLabel lblPris = new JLabel("Pris");
+		lblPris.setBounds(6, 120, 61, 16);
+		panelProductL.add(lblPris);
+		
+		JButton btn_changeP = new JButton("Ändra");
+		btn_changeP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProductListWindow plw1 = new ProductListWindow();
-				plw1.productChangeScreen();
+				String pNumber = textField_PNbrC.getText();
+				String pName = textField_PNameC.getText();
+				String price = textField_PPC.getText();
 				
-				int index = list_2.getSelectedIndex();
-				Product p = pl.getElementAt(index);
+				Product p = controller.findProduct(pNumber);
 				
-				//Create set methods in plw1 to populate the popup
-				//plw1.setPPrice(p.getPPrice());
-				//plw1.setPNumber(p.getPNumber());
+				if(p == null){
+					//Visa meddelande att produkt inte kunde hittas
+					return;
+				}
 				
+				p.setPName(pName);
 				
-				//Create get methods to retrieve the new values and set them in the p object
-				//p.setPName(plw1.getPPrice());
-				//p.setPNumber(plw1.getPNumber());
-				//p.setPPrice(newPPrice);
+				int pPrice = 0;
+				try{
+					pPrice = Integer.parseInt(price);
+				}catch(Exception ex){
+					//Visa meddelande att pris måste vara numerisk
+					return;
+				}
 				
-				//fixa rutan imorn
+				p.setPName(pName);
+				p.setPPrice(pPrice);
 				
-				
-				
-				
-				
-				
+				list_2.repaint();
 				
 			}
 		});
-	
-		btnndra_1.setBounds(451, 428, 117, 29);
-		panelProductL.add(btnndra_1);
+		btn_changeP.setBounds(2, 168, 117, 29);
+		panelProductL.add(btn_changeP);
 		panelProductL.setVisible(false);
 
 		final JPanel panelOrderH = new JPanel();
@@ -799,7 +894,7 @@ public class applicaiton {
 		scrollPane_3.setBounds(6, 23, 581, 404);
 		panelOrderH.add(scrollPane_3);
 		
-		JList list_3 = new JList();
+		JList list_3 = new JList(ol);
 		list_3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_3.setViewportView(list_3);
 		
@@ -818,23 +913,6 @@ public class applicaiton {
 		});
 		btnTillbaka_4.setBounds(0, 428, 117, 29);
 		panelOrderH.add(btnTillbaka_4);
-		
-		textField_findOrder = new JTextField();
-		textField_findOrder.setToolTipText("Ange ordernummer");
-		textField_findOrder.setBounds(343, 427, 134, 28);
-		panelOrderH.add(textField_findOrder);
-		textField_findOrder.setColumns(10);
-		
-		JButton btnNewButton_1 = new JButton("Hitta order");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String oNumber = textField_findOrder.getText();
-				controller.customer.findOrder(oNumber);
-				
-			}
-		});
-		btnNewButton_1.setBounds(470, 428, 117, 29);
-		panelOrderH.add(btnNewButton_1);
 		panelOrderH.setVisible(false);
 
 		//Buttons
@@ -854,6 +932,8 @@ public class applicaiton {
 			public void actionPerformed(ActionEvent e) {
 				panelFindC.setVisible(true);
 				panelMenu.setVisible(false);
+				
+				ol.clear();
 			}
 		});
 		btnHittandraKund.setBounds(92, 91, 351, 61);
@@ -867,7 +947,6 @@ public class applicaiton {
 				panelMenu.setVisible(false);
 				
 				ArrayList<Product> products = controller.getProducts();
-				System.out.println("Antal produkter : " + products.size());
 				
 				if(products.size() != 0){
 					for(Product p : products){
@@ -879,7 +958,7 @@ public class applicaiton {
 			}
 		});
 		
-		JButton btnProductList = new JButton("Produkt lista");
+		JButton btnProductList = new JButton("Produktlista");
 		btnProductList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pl.clear();
@@ -888,7 +967,7 @@ public class applicaiton {
 				
 				ArrayList<Product> products = productRegister.getProducts();
 				
-				System.out.println("Antal produkter : " + products.size());
+				
 				
 				if(products.size() != 0){
 					for(Product p : products){
@@ -920,6 +999,14 @@ public class applicaiton {
 			public void actionPerformed(ActionEvent e) {
 				panelOrderH.setVisible(true);
 				panelMenu.setVisible(false);
+				
+				ArrayList<Order> orders = controller.getOrders();
+				ol.clear();
+				for(Order o : orders){
+					ol.addElement(o);
+				}
+				
+				list_3.repaint();
 			}
 		});
 		btnOrderHistory.setBounds(92, 392, 351, 65);
@@ -935,6 +1022,7 @@ public class applicaiton {
 					clearSearchFields();
 					
 					Customer c = controller.findCustomer(cNumber);
+					ol.clear();
 					
 					if(c != null){
 						
@@ -1001,5 +1089,21 @@ public class applicaiton {
 		textFieldCAddress.setBackground(Color.LIGHT_GRAY);
 		textFieldCAddress.setEditable(false);
 		
+	}
+	
+	
+	public void updateProduct(String pNumber, String pName, int pPrice){
+		Product p = controller.findProduct(pNumber);
+		
+		if(p == null){
+			JOptionPane.showMessageDialog(frmSchinnBenn,
+				    "Finns ingen sådan produkt",
+				    "Finns ingen sådan produkt",
+				    JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
+		p.setPName(pName);
+		p.setPPrice(pPrice);
 	}
 }
