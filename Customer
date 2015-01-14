@@ -28,11 +28,11 @@ public class Customer {
 	public String getCName(){
 		return this.cName;
 	}
-	public void setCName(String newCName){
+	public void setCName(String newCName){ 
 		this.cName = newCName;
 	}
 	public Customer(String cNumber, String cName){
-		this.setCNumber(cNumber);
+		this.setCNumber(cNumber); //utnyttja våra setfunktioner
 		this.setCName(cName);
 		this.orders = new ArrayList<Order>();
     }
@@ -41,6 +41,7 @@ public class Customer {
 		this.orders.remove(o);
 	}
 	
+	//Override toString in Object klassen för att få rätt form på sträng representationen utav vårt objekt
 	@Override
 	public String toString(){
 		
