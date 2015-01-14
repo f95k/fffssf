@@ -30,4 +30,9 @@ public class Orderline {
 		this.setAmount(amount);
 	}
 	
+	@Override
+	public String toString(){
+		return "Produkt: " + product.getPName() + " Antal: " + amount;
+	}
+	
 }
