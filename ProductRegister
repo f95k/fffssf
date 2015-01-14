@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class ProductRegister {
@@ -22,7 +21,7 @@ public class ProductRegister {
 		this.products.remove(p);
 	}
 	
-	public boolean addProduct(String pNumber, String pName, int pPrice){
+	public boolean addProduct(String pNumber, String pName, int pPrice){ //returnerar en true eller false. kan sätta i en if - kan lägga i en varninglist. byta ut controllen - kunna se om databasen sparade det
 		Product tempProduct = new Product(pNumber, pName, pPrice);
 		this.products.add(tempProduct);
 		if(this.findProduct(pNumber) != null) return true;
