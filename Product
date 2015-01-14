@@ -6,7 +6,6 @@ public class Product {
 	private String pNumber;
 	private String pName;
 	private int pPrice;
-	private int pDiscount;
     private ArrayList<Orderline> orderlines;
 	
     public void addOrderline(Orderline orderline){
@@ -38,13 +37,6 @@ public class Product {
 		this.pPrice = newPPrice;
 	}
 	
-	public void setPDiscount(int discount) {
-		this.pDiscount = discount;
-	}
-	
-	public int getPDiscount() {
-		return this.pDiscount;
-	}
 	
 	public Product(String pNumber, String pName, int pPrice){
 		this.setPNumber(pNumber);
@@ -53,9 +45,9 @@ public class Product {
         this.orderlines = new ArrayList<Orderline>();
 	}
 	
-	@Override
+	@Override  
 	public String toString(){
-		return "Produktnummer: " + this.pNumber + " ProduktNamn: " + this.pName + " Pris: " + this.pPrice;
+		return "Produktnummer: " + this.pNumber + " ProduktNamn: " + this.pName + " Pris: " + this.pPrice; //objekt till tostring. representaation av objeket > klassnambet + kod > säger inte så mkt. strängpresentation . bygga upp en egen sträng hur objektet ska overridas.
 	}
 }
 
