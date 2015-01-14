@@ -80,7 +80,6 @@ public class applicaiton {
 	private DefaultListModel<Order> ol;
 	private JButton changeP;
 	protected JTextComponent lblRepons;
-	private JTextField textField_ODiscount;
 	private JTextField textField_Olines;
 	private JTextField textField_PName;
 	private JTextField textField_PNbr;
@@ -629,15 +628,6 @@ public class applicaiton {
 				lblProdukt.setForeground(SystemColor.controlHighlight);
 				lblProdukt.setBounds(410, 10, 61, 16);
 				panelAddO_1.add(lblProdukt);
-				
-				textField_ODiscount = new JTextField();
-				textField_ODiscount.setColumns(10);
-				textField_ODiscount.setBounds(111, 126, 134, 28);
-				panelAddO_1.add(textField_ODiscount);
-				
-				JLabel lblRabatt = new JLabel("Rabatt:");
-				lblRabatt.setBounds(6, 132, 61, 16);
-				panelAddO_1.add(lblRabatt);
 				
 				textField_Olines = new JTextField();
 				textField_Olines.setBounds(214, 258, 61, 16);
