@@ -43,9 +43,12 @@ public class CustomerRegister {
 		return null;
 	}
 	
-	public void addOrder(String oNumber, Customer customer) {
-		Order tmpOrder = new Order(oNumber, customer);
-		orders.add(tmpOrder);
+	public ArrayList<Order> getOrders(){
+		return this.orders;
+	}
+	
+	public void addOrder(Order order) {
+		orders.add(order);
 	}
 	
 	public void removeOrder(Order o) {
