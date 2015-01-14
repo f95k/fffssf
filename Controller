@@ -7,13 +7,11 @@ public class Controller {
 	CustomerRegister customer;
 	JFrame frmSchinnBenn;
 	ProductRegister product;
-	Order order;
 	
-	public Controller(CustomerRegister customerReg, JFrame frmSchinnBenn, ProductRegister productReg, Order addOrder) {
+	public Controller(CustomerRegister customerReg, JFrame frmSchinnBenn, ProductRegister productReg) {
 		 this.customer = customerReg;
 		 this.product = productReg;
 		 this.frmSchinnBenn = frmSchinnBenn;
-		 this.order = addOrder;
 	}
 	
 	public boolean addCustomer(String cNumber, String cName) {
@@ -24,6 +22,10 @@ public class Controller {
 	public Customer findCustomer(String cNumber){
 		return this.customer.findCustomer(cNumber);
 		
+	}
+	
+	public void removeProduct(Product p){
+		product.removeProduct(p);
 	}
 
 	public void removeCustomer(Customer c) {
@@ -44,10 +46,20 @@ public class Controller {
 		return product.getProducts();
 	}
 	
+	public void addOrder(Customer c, Order o){
+		customer.addOrder(o);
+		c.addOrder(o);
+	}
+	
 	public void addOrderline(Product p, Orderline ol, Order o){
+		ol.setProduct(p);
 		p.addOrderline(ol);
 		ol.setOrder(o);
-		ol.setProduct(p);
+		o.addOrderline(ol);
+	}
+	
+	public ArrayList<Order> getOrders(){
+		return customer.getOrders();
 	}
 	
 	public Order getOrder(Customer c, String oNumber){
